@@ -1,0 +1,41 @@
+<app-header titulo="Actuación"></app-header>
+
+<ion-content class="card-background-page">
+    <ion-card>
+        <img src="assets/img/cardBckgrd.jpg" />
+        <div class="card-title">{{ actuacion.tipo }}</div>
+        <!-- <div class="card-subtitle">41 Listings</div> -->
+        <ion-card-content class="card-content">
+            <ion-chip>
+                <ion-icon name="pin" color="primary"></ion-icon>
+                <ion-label>{{ actuacion.lugar }}</ion-label>
+            </ion-chip>
+            <hr>
+            <h1 class="text-center">{{ actuacion.fecha | date: 'dd/MM/yyyy' }}</h1>
+            <h2 style="font-weight: bold">{{ actuacion.notas }}</h2>
+        </ion-card-content>
+        <hr color="black">
+        <ion-card-content>
+            <ion-list>
+                <ion-list-header>
+                    <ion-label>
+                        <h1>Músicos:</h1>
+                    </ion-label>
+                </ion-list-header>
+                <ion-item *ngFor="let musico of actuacion.musicos">
+                    <ion-label>{{ musico }}</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button color="success" size="small" fill="solid" expand="full">Actualizar</ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button (click)="closeModal()" color="primary" size="small" fill="solid" expand="full">Cerrar</ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

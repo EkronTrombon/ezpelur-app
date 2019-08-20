@@ -1,0 +1,33 @@
+<app-header titulo="Actuaciones"></app-header>
+
+<ion-content>
+    <ion-list *ngIf="actuaciones.length !== 0">
+        <ion-item *ngFor="let act of actuaciones" (click)="actuacionDetail(act)" detail>
+            <ion-icon slot="start" name="pin"></ion-icon>
+            <ion-label>
+                <h2>{{ act.tipo }} - {{ act.lugar }}</h2>
+                <p>{{ act.fecha | date: 'dd/MM/yyyy' }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="actuaciones.length === 0">
+        <ion-item *ngFor="let item of [1,1,1]">
+            <ion-icon>
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-icon>
+            <ion-label>
+                <h2>
+                    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+                </h2>
+                <p>
+                    <ion-skeleton-text animated style="width: 35%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="primary">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "EzpelurApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
