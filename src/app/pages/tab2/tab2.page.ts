@@ -3,6 +3,8 @@ import { Actuacion } from '../../interfaces/interfaces';
 import { ActuacionService } from '../../services/actuacion.service';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { ActuacionDetailComponent } from '../../components/actuacion-detail/actuacion-detail.component';
+import { ActuacionUpdateComponent } from '../../components/actuacion-update/actuacion-update.component';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-tab2',
@@ -15,10 +17,12 @@ export class Tab2Page implements OnInit {
 
   constructor(private actuacionService: ActuacionService,
               private loadingCtrl: LoadingController,
-              private modalCtrl: ModalController) {}
+              private modalCtrl: ModalController,
+              private uiService: UiService) {}
 
   ngOnInit() {
     this.cargaActuaciones();
+    this.actuacionService.nuevaActuacion.subscribe(event => this.cargaActuaciones());
   }
 
   async cargaActuaciones() {
@@ -40,6 +44,30 @@ export class Tab2Page implements OnInit {
       componentProps: { 'actuacion': act }
     });
     return await modal.present();
+  }
+
+  async newActuacion() {
+    const modal = await this.modalCtrl.create({
+      component: ActuacionUpdateComponent
+    });
+    return await modal.present();
+  }
+
+  async actualizar(act) {
+    const modal = await this.modalCtrl.create({
+      component: ActuacionUpdateComponent,
+      componentProps: { 'actuacion': act }
+    });
+    return await modal.present();
+  }
+
+  async borrar(act: Actuacion) {
+    const borrada = await this.actuacionService.deleteActuacion(act._id);
+    if (borrada) {
+      this.uiService.toastInformativo('Actuación eliminada!');
+    } else {
+      this.uiService.toastInformativo('No se ha podido eliminar la actuación');
+    }
   }
 
 }

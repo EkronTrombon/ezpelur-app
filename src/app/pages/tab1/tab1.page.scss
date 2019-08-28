@@ -6,7 +6,7 @@ ion-slide {
 
 ion-slide::after {
     content: "";
-    background: url('../../../assets/img/homeBkgrd.jpg');
+    background: url('../../../assets/img/homeBkgrd.jpg') no-repeat fixed center;
     opacity: 0.75;
     top: 0;
     left: 0;

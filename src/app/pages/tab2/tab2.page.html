@@ -2,13 +2,27 @@
 
 <ion-content>
     <ion-list *ngIf="actuaciones.length !== 0">
-        <ion-item *ngFor="let act of actuaciones" (click)="actuacionDetail(act)" detail>
-            <ion-icon slot="start" name="pin"></ion-icon>
-            <ion-label>
-                <h2>{{ act.tipo }} - {{ act.lugar }}</h2>
-                <p>{{ act.fecha | date: 'dd/MM/yyyy' }}</p>
-            </ion-label>
-        </ion-item>
+        <ion-item-sliding *ngFor="let act of actuaciones">
+            <ion-item-options side="start">
+                <ion-item-option color="success" (click)="actualizar(act)">
+                    <ion-icon slot="icon-only" name="switch"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item (click)="actuacionDetail(act)">
+                <ion-icon color="primary" slot="start" name="pin"></ion-icon>
+                <ion-label>
+                    <h2>{{ act.tipo }} - {{ act.lugar }}</h2>
+                    <p>{{ act.fecha | date: 'dd/MM/yyyy' }}</p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="borrar(act)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
     <ion-list *ngIf="actuaciones.length === 0">
         <ion-item *ngFor="let item of [1,1,1]">
@@ -26,7 +40,7 @@
         </ion-item>
     </ion-list>
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button color="primary">
+        <ion-fab-button color="primary" (click)="newActuacion()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

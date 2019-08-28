@@ -3,19 +3,24 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { ActuacionDetailComponent } from './actuacion-detail/actuacion-detail.component';
+import { ActuacionUpdateComponent } from './actuacion-update/actuacion-update.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    ActuacionDetailComponent
+    ActuacionDetailComponent,
+    ActuacionUpdateComponent
   ],
   entryComponents: [
-    ActuacionDetailComponent
+    ActuacionDetailComponent,
+    ActuacionUpdateComponent
   ],
   imports: [
     IonicModule,
+    FormsModule,
     CommonModule
   ],
   exports: [

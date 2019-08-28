@@ -1,0 +1,53 @@
+<app-header titulo="Actualizar actuación"></app-header>
+
+<ion-content>
+    <form (ngSubmit)="saveAct(fAddAct)" #fAddAct="ngForm">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col>
+                    <ion-list>
+                        <ion-item lines="none">
+                            <ion-label position="floating">Fecha</ion-label>
+                            <ion-datetime name="fecha" displayFormat="DD/MM/YYYY" [min]="anioActual" [max]="anioActual + 4" [(ngModel)]="actuacion.fecha" required></ion-datetime>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-label position="floating">Lugar</ion-label>
+                            <ion-input name="lugar" type="text" [(ngModel)]="actuacion.lugar" required></ion-input>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-label position="floating">Contratación</ion-label>
+                            <ion-input name="contratacion" type="text" [(ngModel)]="actuacion.contratacion" required></ion-input>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-label position="floating">Tipo</ion-label>
+                            <ion-select placeholder="Tipo" name="tipo" [(ngModel)]="actuacion.tipo" required>
+                                <ion-select-option *ngFor="let tipo of tiposAct" [value]="tipo" selected>{{ tipo }}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-label position="floating">Notas</ion-label>
+                            <ion-textarea name="notas" type="text" [(ngModel)]="actuacion.notas" required></ion-textarea>
+                        </ion-item>
+                        <ion-list>
+                            <ion-list-header>
+                                <ion-label>Músicos:</ion-label>
+                            </ion-list-header>
+                            <ion-item *ngFor="let musico of listaMusicos">
+                                <ion-checkbox slot="start" [checked]="musico.sel" (ionChange)="cambiarSel(musico)"></ion-checkbox>
+                                <ion-label>{{ musico.nombre }} {{ musico.apellido }} ({{ musico.instrumento }})</ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button type="submit" color="success" size="small" fill="solid" expand="full">{{ textoBoton }}</ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button (click)="closeModal()" color="primary" size="small" fill="solid" expand="full">Cerrar</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>
