@@ -1,3 +1,18 @@
 <app-header titulo="Partituras"></app-header>
 
-<ion-content></ion-content>
+<ion-segment (ionChange)="segmentChanged($event)" color="secondary" scrollable>
+    <ion-segment-button *ngFor="let categoria of categorias" [value]="categoria.valor">
+        <ion-label>{{ categoria.nombre }}</ion-label>
+    </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let partitura of partituras">
+            <ion-icon color="primary" slot="start" name="download" (click)="descargaPartitura(partitura.url)"></ion-icon>
+            <ion-label>
+                <h2>{{ partitura.nombre }}</h2>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

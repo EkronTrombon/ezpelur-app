@@ -19,3 +19,15 @@ export interface Usuario {
     instrumentoSec: string;
     sel?: boolean;
 }
+
+export interface Partitura {
+    id?: string;
+    nombre: string;
+    categoria: string;
+    url: string;
+}
+
+export interface Categoria {
+    id?: string;
+    nombre: string;
+}
