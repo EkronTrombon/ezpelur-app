@@ -14,6 +14,7 @@ import { UiService } from '../../services/ui.service';
 export class Tab2Page implements OnInit {
 
   actuaciones: Actuacion[] = [];
+  segSelected = 'lista';
 
   constructor(private actuacionService: ActuacionService,
               private loadingCtrl: LoadingController,
@@ -38,14 +39,6 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  async actuacionDetail(act: Actuacion) {
-    const modal = await this.modalCtrl.create({
-      component: ActuacionDetailComponent,
-      componentProps: { 'actuacion': act }
-    });
-    return await modal.present();
-  }
-
   async newActuacion() {
     const modal = await this.modalCtrl.create({
       component: ActuacionUpdateComponent
@@ -53,21 +46,9 @@ export class Tab2Page implements OnInit {
     return await modal.present();
   }
 
-  async actualizar(act) {
-    const modal = await this.modalCtrl.create({
-      component: ActuacionUpdateComponent,
-      componentProps: { 'actuacion': act }
-    });
-    return await modal.present();
-  }
-
-  async borrar(act: Actuacion) {
-    const borrada = await this.actuacionService.deleteActuacion(act._id);
-    if (borrada) {
-      this.uiService.toastInformativo('Actuación eliminada!');
-    } else {
-      this.uiService.toastInformativo('No se ha podido eliminar la actuación');
-    }
+  segmentChanged(event) {
+    const seg = event.detail.value;
+    this.segSelected = seg;
   }
 
 }

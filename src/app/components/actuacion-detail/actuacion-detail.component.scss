@@ -1,11 +1,17 @@
+.imgAvatar {
+    width: 50px !important;
+    height: 50px !important;
+    opacity: 1 !important;
+}
+
 .card-background-page {
     ion-card {
         position: relative;
         text-align: center;
     }
     img {
-        opacity: 0.5 !important;
-        height: 250px !important;
+        opacity: 0.5;
+        height: 250px;
     }
     .card-title {
         position: absolute;

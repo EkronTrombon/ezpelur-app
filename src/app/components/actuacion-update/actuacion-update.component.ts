@@ -78,10 +78,8 @@ export class ActuacionUpdateComponent implements OnInit {
   async saveAct(fAddAct) {
     this.setNuevaActuacion(fAddAct.value);
     if (this.actuacion._id) {
-      console.log('Actualizando!');
       await this.udpateActuacion();
     } else {
-      console.log('Creando nueva act!');
       await this.createActuacion();
     }
   }

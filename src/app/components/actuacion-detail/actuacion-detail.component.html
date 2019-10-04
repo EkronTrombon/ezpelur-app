@@ -4,7 +4,6 @@
     <ion-card>
         <img src="assets/img/cardBckgrd.jpg" />
         <div class="card-title">{{ actuacion.tipo }}</div>
-        <!-- <div class="card-subtitle">41 Listings</div> -->
         <ion-card-content class="card-content">
             <ion-chip>
                 <ion-icon name="pin" color="primary"></ion-icon>
@@ -16,14 +15,20 @@
         </ion-card-content>
         <hr color="black">
         <ion-card-content>
-            <ion-list>
+            <ion-list lines="none">
                 <ion-list-header>
                     <ion-label>
                         <h1>Músicos:</h1>
                     </ion-label>
                 </ion-list-header>
-                <ion-item *ngFor="let musico of listaMusicos">
-                    <ion-label>{{ musico.nombre }} {{ musico.apellido }} - {{ musico.instrumento }}</ion-label>
+                <ion-item *ngFor="let musico of listaMusicos" (click)="musicoDetail(musico)">
+                    <ion-avatar slot="start">
+                        <img [src]="musico.img | imagen: tipo" class="imgAvatar">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2><strong>{{ musico.nombre }} {{ musico.apellido }}</strong></h2>
+                        <p>{{ musico.instrumento }}</p>
+                    </ion-label>
                 </ion-item>
             </ion-list>
         </ion-card-content>

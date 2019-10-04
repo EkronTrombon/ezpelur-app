@@ -1,0 +1,72 @@
+<ion-header no-border>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="closeMusico()">
+                <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title text-center>{{ musico.nombre }} {{ musico.apellido }}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="callMusico()">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <img src="assets/img/card.jpg">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12" class="poster-detalle-sobre" text-center>
+                <ion-card class="musicoImg">
+                    <img [src]="musico.img | imagen: tipo" class="musicoImg">
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="6">
+                <p class="tituloCol"><small>Nombre</small></p>
+                <h3>{{ musico.nombre }}</h3>
+            </ion-col>
+            <ion-col size="6">
+                <p class="tituloCol"><small>Apellido</small></p>
+                <h3>{{ musico.apellido }}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="9">
+                <p class="tituloCol"><small>Email</small></p>
+                <h3>{{ musico.email }}</h3>
+            </ion-col>
+            <ion-col size="3">
+                <ion-button expand="full" shape="round" fill="outline" color="primary">
+                    <ion-icon slot="icon-only" name="mail"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="9">
+                <p class="tituloCol"><small>Tfno</small></p>
+                <h3>{{ musico.tfno }}</h3>
+            </ion-col>
+            <ion-col size="3">
+                <ion-button expand="full" shape="round" fill="outline" color="primary">
+                    <ion-icon slot="icon-only" name="call"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <p class="tituloCol"><small>Instrumento Ppal.</small></p>
+                <h3>{{ musico.instrumento }}</h3>
+            </ion-col>
+            <ion-col size="6">
+                <p class="tituloCol"><small>Instrumento Sec.</small></p>
+                <h3>{{ musico.instrumentoSec }}</h3>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

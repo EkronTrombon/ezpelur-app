@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Actuacion, Usuario } from '../../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
+import { MusicoDetailComponent } from '../musico-detail/musico-detail.component';
 
 @Component({
   selector: 'app-actuacion-detail',
@@ -12,6 +13,7 @@ export class ActuacionDetailComponent implements OnInit {
 
   @Input() actuacion: Actuacion;
   listaMusicos: Usuario[] = [];
+  tipo = 'usuarios';
 
   constructor(private modalCtrl: ModalController, private usuarioService: UsuarioService) { }
 
@@ -41,5 +43,13 @@ export class ActuacionDetailComponent implements OnInit {
       });
     });
   }
+
+  async musicoDetail(musico: Usuario) {
+    const modal = await this.modalCtrl.create({
+    component: MusicoDetailComponent,
+    componentProps: { 'musico': musico }
+    });
+    return await modal.present();
+}
 
 }

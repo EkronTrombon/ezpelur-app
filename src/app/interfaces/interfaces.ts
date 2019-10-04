@@ -17,6 +17,7 @@ export interface Usuario {
     tfno: string;
     instrumento: string;
     instrumentoSec: string;
+    img?: string;
     sel?: boolean;
 }
 
