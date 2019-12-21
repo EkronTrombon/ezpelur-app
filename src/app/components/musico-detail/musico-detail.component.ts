@@ -19,7 +19,11 @@ export class MusicoDetailComponent implements OnInit {
   }
 
   callMusico() {
-    console.log('Llamando a ', this.musico.nombre);
+    console.log('Llamando a:', this.musico.nombre);
+  }
+
+  emailMusico() {
+    console.log('Email a:', this.musico.nombre);
   }
 
   closeMusico() {

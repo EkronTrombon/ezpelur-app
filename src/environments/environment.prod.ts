@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  URL: 'https://ezpelurserver.herokuapp.com',
+  // URL: 'https://ezpelurserver.herokuapp.com',
+  URL: 'http://www.ekronxr.com:3000',
   firebase: {
     apiKey: "AIzaSyDXTqx3TDS9DM16gvL2r776ffwPcvJ1hbU",
     authDomain: "ezpelurapp.firebaseapp.com",

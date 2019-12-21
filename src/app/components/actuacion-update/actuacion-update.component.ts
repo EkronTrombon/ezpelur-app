@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Actuacion, Usuario } from '../../interfaces/interfaces';
+import { Actuacion, Usuario, NotificacionPush } from '../../interfaces/interfaces';
 import { UsuarioService } from '../../services/usuario.service';
 import { ActuacionService } from '../../services/actuacion.service';
 import { UiService } from '../../services/ui.service';
+import { PushService } from '../../services/push.service';
 
 @Component({
   selector: 'app-actuacion-update',
@@ -27,11 +28,17 @@ export class ActuacionUpdateComponent implements OnInit {
   };
   tiposAct = ['Gigantes', 'Fanfarre', 'Dianas', 'Concierto', 'Villancicos', 'Otro'];
   listaMusicosSeleccionados: string[] = [];
+  pushNoti = false;
+  notificacionPush: NotificacionPush = {
+    titulo: '',
+    mensaje: ''
+  };
 
   constructor(private modalCtrl: ModalController,
               private usarioService: UsuarioService,
               private actuacionService: ActuacionService,
-              private uiService: UiService) { }
+              private uiService: UiService,
+              private pushService: PushService) { }
 
   async ngOnInit() {
     this.selTipoActuacion();
@@ -76,11 +83,15 @@ export class ActuacionUpdateComponent implements OnInit {
   }
 
   async saveAct(fAddAct) {
-    this.setNuevaActuacion(fAddAct.value);
-    if (this.actuacion._id) {
-      await this.udpateActuacion();
+    if (fAddAct.valid) {
+      this.setNuevaActuacion(fAddAct.value);
+      if (this.actuacion._id) {
+        await this.udpateActuacion();
+      } else {
+        await this.createActuacion();
+      }
     } else {
-      await this.createActuacion();
+      this.uiService.toastInformativo('Se deben rellenar todos los datos de la actuación');
     }
   }
 
@@ -91,6 +102,9 @@ export class ActuacionUpdateComponent implements OnInit {
       this.modalCtrl.dismiss();
     } else {
       this.uiService.toastInformativo('La actuación no se ha podido crear');
+    }
+    if (this.pushNoti) {
+      this.enviarPushNotification();
     }
   }
 
@@ -120,6 +134,22 @@ export class ActuacionUpdateComponent implements OnInit {
 
   closeModal() {
     this.modalCtrl.dismiss();
+  }
+
+  enviaPush(event) {
+    if (event.detail.checked) {
+      this.pushNoti = true;
+    } else {
+      this.pushNoti = false;
+    }
+  }
+
+  enviarPushNotification() {
+    this.notificacionPush.titulo = `Nueva actuación añadida: ${this.actuacion.tipo}`;
+    this.notificacionPush.mensaje = `Fecha: ${this.actuacion.fecha} - Lugar: ${this.actuacion.lugar}`;
+    this.pushService.sendPushNotification(this.notificacionPush).subscribe(resp => {
+      console.log(resp);
+    });
   }
 
 }

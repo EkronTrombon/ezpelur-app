@@ -32,3 +32,8 @@ export interface Categoria {
     id?: string;
     nombre: string;
 }
+
+export interface NotificacionPush {
+    titulo: string;
+    mensaje: string;
+}
